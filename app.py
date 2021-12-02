@@ -1,6 +1,6 @@
 import requests
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,7 +26,7 @@ def convert():
     if r.status_code == 200:
         rate = r.json()["conversion_rates"][currency_1]
     else:
-        pass
+        return abort(400, "Invalid Currency")
 
     # return response with rate in json
 
